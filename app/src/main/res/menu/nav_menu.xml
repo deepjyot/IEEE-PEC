@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/nav_account"
+        android:drawable="@drawable/ic_action_name"
+        android:title="My Account" />
+
+    <item android:id="@+id/nav_setting"
+        android:drawable="@drawable/ic_action_setting"
+        android:title="Setting" />
+
+    <item android:id="@+id/nav_logout"
+        android:title="Logout" />
+
+</menu>

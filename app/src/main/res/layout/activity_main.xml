@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="20dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cloud_large" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/app_title_dimen_large"
+        android:textAllCaps="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="160dp"/>
+
+    <GridLayout
+        android:columnCount="1"
+        android:rowCount="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/main_login_button"
+            style="@style/Widget.IEEE.Button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="onLoginButtonClick"
+            android:text="@string/main_login_button"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:elevation="4dp"
+            tools:targetApi="lollipop" />
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/main_sign_up_button"
+            style="@style/Widget.IEEE.Button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="onSignUpButtonClick"
+            android:text="@string/main_sign_up_button"
+            android:textAllCaps="false"
+            android:elevation="8dp"
+            tools:targetApi="lollipop" />
+    </GridLayout>
+
+</LinearLayout>
