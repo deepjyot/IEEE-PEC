@@ -1,15 +1,21 @@
 package com.example.hp.ieeepec;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
 
 import com.example.hp.ieeepec.util.EmailValidatorImpl;
 import com.example.hp.ieeepec.util.PasswordValidatorImpl;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
     private final String TAG = this.getClass().toString();
@@ -21,6 +27,45 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private TextInputEditText emailIdEditText;
     private TextInputEditText passwordEditText;
     private TextInputEditText confirmPasswordEditText;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private void createAcct(){
+        TextInputEditText firstNameEditText = findViewById(R.id.sign_up_first_name_edit_text);
+        TextInputEditText lastNameEditText = findViewById(R.id.sign_up_last_name_edit_text);
+        Switch membershipSwitch = findViewById(R.id.membership_switch);
+        TextInputEditText ieeeMembershipIdEditText = findViewById(R.id.ieee_membership_id_edit_text);
+        com.example.hp.ieeepec.User user;
+
+        boolean isIeeeeMember = membershipSwitch.isChecked();
+        if(isIeeeeMember){
+            user = new com.example.hp.ieeepec.User(emailIdEditText.getText().toString(),
+                    firstNameEditText.getText().toString(),
+                    lastNameEditText.getText().toString(),
+                    passwordEditText.getText().toString(),
+                    membershipSwitch.isChecked(),
+                    ieeeMembershipIdEditText.getText().toString());
+        }
+        else{
+            user = new com.example.hp.ieeepec.User(emailIdEditText.getText().toString(),
+                    firstNameEditText.getText().toString(),
+                    lastNameEditText.getText().toString(),
+                    passwordEditText.getText().toString());
+        }
+
+        Map<String, Object> userMapObj = new HashMap<>();
+        userMapObj.put("first_name",user.getFirstName());
+        userMapObj.put("last_name",user.getLastName());
+        userMapObj.put("email_id",user.getEmailId());
+        userMapObj.put("encoded_password",user.getEncodedPassword());
+        userMapObj.put("is_ieee_member",user.isIeeeMember());
+        userMapObj.put("ieee_membership_id",user.getIeeeMembershipId());
+
+        // Add a new document with a generated ID
+        db.collection("testUser")
+                .add(userMapObj)
+                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +89,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             emailIdInput.setErrorEnabled(false);
             confirmPasswordInput.setErrorEnabled(false);
             passwordInput.setErrorEnabled(false);
-
-            Snackbar snackbar = Snackbar.make(view, "Account created", Snackbar.LENGTH_SHORT);
-            snackbar.show();
+            createAcct();
+            Intent intent = new Intent(this, RSSFeedActivity.class);
+            startActivity(intent);
+            finish();
+//            Snackbar snackbar = Snackbar.make(view, "Account created", Snackbar.LENGTH_SHORT);
+//            snackbar.show();
         }
         else{
             if(!emailValidator.validate(emailIdEditText.getText().toString())){

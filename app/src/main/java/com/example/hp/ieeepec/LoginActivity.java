@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.Task;
 
 import java.net.URL;
 
+import static android.os.SystemClock.sleep;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -69,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(emailValidator.validate(emailIdEditText.getText().toString())){
             finish();
+            Intent intent = new Intent(this, RSSFeedActivity.class);
+            startActivity(intent);
         }
         else{
             Snackbar snackbar = Snackbar.make(view, "Login Unsuccessful", Snackbar.LENGTH_SHORT);
@@ -113,8 +117,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.w(TAG,"EMAIL: " + email);
             Log.w(TAG,"IMAGE_URL: " + imageURL);
 
-            googleSignInButton.setVisibility(View.GONE);
-            signOutButton.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(this, RSSFeedActivity.class);
+            startActivity(intent);
+            finish();
+
         }
         else{
             googleSignInButton.setVisibility(View.VISIBLE);
@@ -155,9 +161,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.login_button:
-                Intent intent = new Intent(this, NotificationActivity.class);
-                startActivity(intent);
-                finish();
+                login(view);
                 break;
 
             case R.id.sign_out_button:

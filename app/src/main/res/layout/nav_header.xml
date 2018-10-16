@@ -9,11 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:padding="10dp"
+        android:layout_marginTop="20dp"
         android:textStyle="bold"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:text="Header Nav"
         android:textColor="#ffffff" />
 </RelativeLayout>

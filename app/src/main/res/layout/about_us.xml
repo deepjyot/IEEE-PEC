@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".AboutUs"
+android:id="@+id/drawerLayout"
+android:fitsSystemWindows="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/nav_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/ic_logo"/>
+        <com.uncopt.android.widget.text.justify.JustifiedTextView
+            android:padding="5dp"
+            android:layout_margin="20dp"
+            android:textColor="#303336"
+            android:textSize="18sp"
+            android:id="@+id/about_us_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logo"
+
+            android:text="The IEEE was formed in 1963 by the merger of the Institute of Radio Engineers and the American Institute of Electrical Engineers. IEEE's core agenda is to encourage technological innovation and skill development for the welfare of society. The IEEE educational programs aim at fostering individual commitment to continuing education among IEEE members and help in improving global conditions.
+
+We the members of IEEE PEC have a vision to conquer zenith, zeal to learn, and the cooperation among the members has been constantly driving us forward and encouraging the budding minds at PEC to innovate for better good of society and excel in all fields.
+
+The Student Chapter of IEEE PEC was started in 2001. The society now stands as the strongest technical society in college as well as Chandigarh region with currently 100+ active members and has served for years with the objective of enhancement of computer science, electrical and electronics engineers through various workshops and events to provide a learning platform. This is the official IEEE PEC Student Branch Facebook Page where IEEE PEC Student Branch members can interact among themselves and with the representatives of IEEE PEC."/>
+    </RelativeLayout>
+
+</LinearLayout>
+
+<android.support.design.widget.NavigationView
+    android:id="@+id/nav_view"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    app:menu="@menu/nav_menu"
+    app:headerLayout="@layout/nav_header"
+    android:fitsSystemWindows="true">
+
+</android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

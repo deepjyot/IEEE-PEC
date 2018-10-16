@@ -1,34 +1,27 @@
 package com.example.hp.ieeepec;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.List;
+public class AboutUs extends AppCompatActivity {
 
-public class NotificationActivity extends AppCompatActivity {
-
-    //a list to store all the products
-    List<Notification> notificationList;
-
-    //the recyclerview
-    RecyclerView recyclerView;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-
     private Toolbar mToolbar;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
+        setContentView(R.layout.about_us);
+
         mToolbar = (Toolbar) findViewById(R.id.nav_action);
         setSupportActionBar(mToolbar);
 
@@ -39,33 +32,6 @@ public class NotificationActivity extends AppCompatActivity {
         mToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        //getting the recyclerview from xml
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //initializing the productlist
-        notificationList = new ArrayList<>();
-
-
-        //adding some items to our list
-        notificationList.add(
-                new Notification(
-                        "First GBM",
-                        "Please gather for the meeting",
-                        "Date: 3rd October 2018",
-                        "Time: 5 pm",
-                        "Venue: L21",
-                        R.drawable.ic_announcement_black_24dp));
-
-        //creating recyclerview adapter
-        NotificationAdapter adapter = new NotificationAdapter(this, notificationList);
-
-        //setting adapter to recyclerview
-        recyclerView.setAdapter(adapter);
-
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -80,16 +46,18 @@ public class NotificationActivity extends AppCompatActivity {
                         // For example, swap UI fragments here
                         switch(menuItem.getItemId()) {
                             case R.id.menu_about_us:
-                                startActivity(new Intent(NotificationActivity.this, AboutUs.class));
+                                finish();
+                                startActivity(new Intent(AboutUs.this, AboutUs.class));
                                 break;
                             case R.id.menu_profile:
-                                startActivity(new Intent(NotificationActivity.this, MyProfile.class));
-                                break;
-                            case R.id.menu_home:
-                                startActivity(new Intent(NotificationActivity.this, RSSFeedActivity.class));
+                                finish();
+                                startActivity(new Intent(AboutUs.this, MyProfile.class));
                                 break;
                             case R.id.menu_notification:
-                                startActivity(new Intent(NotificationActivity.this, NotificationActivity.class));
+                                startActivity(new Intent(AboutUs.this, NotificationActivity.class));
+                                break;
+                            case R.id.menu_home:
+                                startActivity(new Intent(AboutUs.this, RSSFeedActivity.class));
                                 break;
                         }
                         mDrawerLayout.closeDrawers();
@@ -99,4 +67,3 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
 }
-
